@@ -37,7 +37,7 @@ db-replace dev example.com.local:8888 dev.example.com example.com-YYYYMMDD-HHMMS
 ```
 **Returns**
 ```
-$ENVIRONMENT-$DATABASE-$DATETIME.sql
+$ENVIRONMENT-$FILE
 dev-example.com-YYYYMMDD-HHMMSS.sql
 ```
 
@@ -56,18 +56,11 @@ $ENVIRONMENT-$DATABASE-$DATETIME.sql
 dev-example.com-YYYYMMDD-HHMMSS.sql
 ```
 
-### db-push
-**Usage**
-```
-db-push $ENVIRONMENT $FILE
-db-push dev dev-example.com-YYYYMMDD-HHMMSS.sql
-```
-
 ### db-pull
 **Usage**
 ```
 db-push $ENVIRONMENT $FILENAME
-db-push dev dev-example.sql
+db-push dev dev-example.com
 ```
 **Returns**
 ```
@@ -89,6 +82,18 @@ dev-example.com-YYYYMMDD-HHMMSS.sql
 $FILENAME-$DATETIME.sql
 example.com-YYYYMMDD-HHMMSS.sql
 ```
+
+### db-push
+**Usage**
+```
+db-push $ENVIRONMENT $FILE
+db-push dev dev-example.com-YYYYMMDD-HHMMSS.sql
+```
+**Returns**
+```
+Success/Failure
+```
+
 ## MAMP
 Make sure MAMP is in your $PATH - '/Applications/MAMP/bin/php/php5.6.2/bin'
 
