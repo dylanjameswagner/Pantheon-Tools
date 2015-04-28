@@ -18,6 +18,7 @@ verbose
 ## Usage
 
 ### db-dump
+
 **Usage**
 ```
 db-dump $DATABASE
@@ -30,6 +31,8 @@ example.com-YYYYMMDD-HHMMSS.sql
 ```
 
 ### db-replace
+$DATABASE first
+
 **Usage**
 ```
 db-replace $ENVIRONMENT $SEARCH $REPLACE $FILE
@@ -42,6 +45,8 @@ dev-example.com-YYYYMMDD-HHMMSS.sql
 ```
 
 ### db-dump-replace
+$DATABASE first
+
 **Usage**
 ```
 db-dump-replace $DATABASE $ENVIRONMENT $SEARCH $REPLACE
@@ -57,6 +62,8 @@ dev-example.com-YYYYMMDD-HHMMSS.sql
 ```
 
 ### db-pull
+$ENVIRONMENT first
+
 **Usage**
 ```
 db-push $ENVIRONMENT $FILENAME
@@ -69,6 +76,8 @@ dev-example.com-YYYYMMDD-HHMMSS.sql
 ```
 
 ### db-pull-replace
+$ENVIRONMENT first
+
 **Usage**
 ```
 db-pull-replace $ENVIRONMENT $FILENAME $SEARCH $REPLACE
@@ -84,6 +93,7 @@ example.com-YYYYMMDD-HHMMSS.sql
 ```
 
 ### db-push
+
 **Usage**
 ```
 db-push $ENVIRONMENT $FILE
