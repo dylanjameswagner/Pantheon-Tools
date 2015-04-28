@@ -32,8 +32,8 @@ example.com-YYYYMMDD-HHMMSS.sql
 ### db-replace
 **Usage**
 ```
-db-replace $FILENAME $ENVIRONMENT $SEARCH $REPLACE
-db-replace example.com-YYYYMMDD-HHMMSS.sql dev example.com.local:8888 dev.example.com
+db-replace $ENVIRONMENT $SEARCH $REPLACE $FILE
+db-replace dev example.com.local:8888 dev.example.com example.com-YYYYMMDD-HHMMSS.sql
 ```
 **Returns**
 ```
