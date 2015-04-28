@@ -16,7 +16,6 @@ verbose
 ```
 
 ## Usage
-- for MAMP, add '/Applications/MAMP/bin/php/php5.6.2/bin' to your $PATH
 
 ### db-dump
 **Usage**
@@ -90,6 +89,8 @@ dev-example.com-YYYYMMDD-HHMMSS.sql
 $FILENAME-$DATETIME.sql
 example.com-YYYYMMDD-HHMMSS.sql
 ```
+## MAMP
+Make sure MAMP is in your $PATH - '/Applications/MAMP/bin/php/php5.6.2/bin'
 
 ## References
 - https://pantheon.io/blog/importing-large-wordpress-sites-pantheon
