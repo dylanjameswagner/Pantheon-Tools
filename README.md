@@ -31,7 +31,6 @@ example.com-YYYYMMDD-HHMMSS.sql
 ```
 
 ### db-replace
-$DATABASE first
 
 **Usage**
 ```
@@ -45,7 +44,6 @@ dev-example.com-YYYYMMDD-HHMMSS.sql
 ```
 
 ### db-dump-replace
-$DATABASE first
 
 **Usage**
 ```
@@ -62,7 +60,6 @@ dev-example.com-YYYYMMDD-HHMMSS.sql
 ```
 
 ### db-pull
-$ENVIRONMENT first
 
 **Usage**
 ```
@@ -76,7 +73,6 @@ dev-example.com-YYYYMMDD-HHMMSS.sql
 ```
 
 ### db-pull-replace
-$ENVIRONMENT first
 
 **Usage**
 ```
