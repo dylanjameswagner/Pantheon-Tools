@@ -1,0 +1,31 @@
+#!/bin/bash
+# ./bin/db-dump-replace example.com dev example.com.local:8888 dev.example.com
+
+if [ ! -d ./tmp ]; then
+	mkdir -v ./tmp;
+fi
+
+DATABASE=$1
+ENVIRONMENT=$2
+SEARCH=$3
+REPLACE=$4
+
+DATETIME=`date "+%Y%m%d-%H%M%S"`
+FILE=$DATABASE-$DATETIME.sql
+
+if [[ -n $DATABASE ]]; then
+
+	mysqldump --defaults-file=./conf/local.cnf $DATABASE > ./tmp/$FILE
+	echo $FILE
+
+	if [[ -n $ENVIRONMENT && $SEARCH && $REPLACE ]]; then
+
+		sed -e "s/$SEARCH/$REPLACE/g" tmp/$FILE > tmp/$ENVIRONMENT-$FILE;
+		echo $ENVIRONMENT-$FILE;
+
+	else
+		echo 'Requires $ENVIRONMENT, $SEARCH and $REPLACE'
+	fi
+else
+	echo 'Requires $DATABASE and $ENVIRONMENT'
+fi

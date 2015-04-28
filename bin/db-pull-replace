@@ -1,0 +1,44 @@
+#!/bin/bash
+# ./bin/db-pull dev example.com
+
+# TODO set default search in cnf
+
+if [ ! -d ./tmp ]; then
+	mkdir -v ./tmp;
+fi
+
+ENVIRONMENT=$1
+FILENAME=$2
+SEARCH=$3
+REPLACE=$4
+
+DATETIME=`date "+%Y%m%d-%H%M%S"`
+FILE=$FILENAME-$DATETIME.sql
+
+if [[ -n $ENVIRONMENT && $FILENAME ]]; then
+
+	if [[ -n $ENVIRONMENT && $ENVIRONMENT == 'dev' ]]; then
+
+		# FIXME $DATABASE from cnf
+		mysqldump --defaults-file=./conf/dev.cnf pantheon > ./tmp/$ENVIRONMENT-$FILE
+		echo $ENVIRONMENT-$FILE
+
+	elif [[ -n $ENVIRONMENT && $ENVIRONMENT == 'test' ]]; then
+
+		# FIXME pull credentials from cnf file
+		mysqldump --defaults-file=./conf/test.cnf pantheon > ./tmp/$ENVIRONMENT-$FILE
+		echo $ENVIRONMENT-$FILE
+
+	fi
+
+	if [[ -n $SEARCH && $REPLACE ]]; then
+
+		sed -e "s/$SEARCH/$REPLACE/g" ./tmp/$ENVIRONMENT-$FILE > ./tmp/$FILE;
+		echo $FILE
+
+	else
+		echo 'Requires $SEARCH and $REPLACE'
+	fi
+else
+	echo 'Requires $ENVIRONMENT and $FILENAME'
+fi

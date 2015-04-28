@@ -1,0 +1,32 @@
+#!/bin/bash
+# ./bin/db-dump example.com
+
+if [ ! -d ./tmp ]; then
+	mkdir -v ./tmp;
+fi
+
+DATABASE=$1
+ENVIRONMENT=$2
+
+DATETIME=`date "+%Y%m%d-%H%M%S"`
+
+if [[ -n $1 ]]; then
+	if [[ -n $2 ]]; then
+
+		mysqldump --defaults-file=./conf/local.cnf $DATABASE > ./tmp/$ENVIRONMENT-$DATABASE-$DATETIME.sql
+		echo $ENVIRONMENT-$DATABASE-$DATETIME.sql
+
+	else
+
+		mysqldump --defaults-file=./conf/local.cnf $DATABASE > ./tmp/$DATABASE-$DATETIME.sql
+		echo $DATABASE-$DATETIME.sql
+
+	fi
+else
+	echo 'Requires $DATABASE'
+fi
+
+# https://pantheon.io/blog/importing-large-wordpress-sites-pantheon
+# http://stackoverflow.com/questions/3268789/add-mysqldump-to-mamp-mysql-w-apache-php-on-macos-x
+# /Applications/MAMP/Library/bin/mysqldump --opt -u root -proot example.com > example.com.sql
+# mysqldump --opt -u root -proot example.com > example.com.sql

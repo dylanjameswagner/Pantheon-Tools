@@ -1,0 +1,39 @@
+#!/bin/bash
+# ./bin/db-push dev example.com-YYYYMMDD-HHMMSS.sql
+
+ENVIRONMENT=$1
+FILE=$2
+DATABASE=$3
+# HOST=$2
+# USER=$3
+# PASS=$4
+
+if [[ -n $ENVIRONMENT && $FILE ]]; then
+
+	if [[ -n $ENVIRONMENT && $ENVIRONMENT == 'local' ]]; then
+		if [[ -n $DATABASE ]]; then
+
+			# mysql --defaults-file=./conf/local.cnf $DATABASE < ./tmp/$FILE
+			echo 'FIXME local push'
+
+		else
+			echo 'Requires $ENVIRONMENT, $FILE, and local $DATABASE'
+		fi
+	elif [[ -n $ENVIRONMENT && $ENVIRONMENT == 'dev' ]]; then
+
+		# FIXME $DATABASE from cnf
+		mysql --defaults-file=./conf/dev.cnf pantheon < ./tmp/$FILE
+		echo 'Successfully pushed to dev'
+
+	elif [[ -n $ENVIRONMENT && $ENVIRONMENT == 'test' ]]; then
+
+		# FIXME $DATABASE from cnf
+		mysql --defaults-file=./conf/test.cnf pantheon < ./tmp/$FILE
+		echo 'Successfully pushed to test'
+
+	else
+		echo 'Push failed'
+	fi
+else
+	echo 'Requires $ENVIRONMENT and $FILE'
+fi

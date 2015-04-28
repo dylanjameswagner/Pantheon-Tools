@@ -1,0 +1,26 @@
+#!/bin/bash
+# ./bin/db-replace example.com-YYYYMMDD-HHMMSS.sql dev example.com.local:8888 dev.example.com
+
+if [ ! -d ./tmp ]; then
+	mkdir -v ./tmp;
+fi
+
+FILE=$1
+# FILENAME=$(basename "$1")
+# EXTENSION="${FILENAME##*.}"
+# FILENAME="${FILENAME%.*}"
+
+ENVIRONMENT=$2
+SEARCH=$3
+REPLACE=$4
+
+DATETIME=`date "+%Y%m%d-%H%M%S"`
+
+if [[ -n $1 && $2 && $3 && $4 ]]; then
+
+	sed -e "s/$SEARCH/$REPLACE/g" tmp/$FILE > tmp/$ENVIRONMENT-$FILE;
+	echo $ENVIRONMENT-$FILE;
+
+else
+	echo 'Requires $FILE, $ENVIRONMENT, $SEARCH, and $REPLACE'
+fi

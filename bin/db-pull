@@ -1,0 +1,31 @@
+#!/bin/bash
+# ./bin/db-pull dev example.com
+
+if [ ! -d ./tmp ]; then
+	mkdir -v ./tmp;
+fi
+
+ENVIRONMENT=$1
+FILENAME=$2
+
+DATETIME=`date "+%Y%m%d-%H%M%S"`
+FILE=$FILENAME-$DATETIME.sql
+
+if [[ -n $ENVIRONMENT && $FILENAME ]]; then
+
+	if [[ -n $ENVIRONMENT && $ENVIRONMENT == 'dev' ]]; then
+
+		# FIXME $DATABASE from cnf
+		mysqldump --defaults-file=./conf/dev.cnf pantheon > ./tmp/$FILE
+		echo $ENVIRONMENT-$FILE
+
+	elif [[ -n $ENVIRONMENT && $ENVIRONMENT == 'test' ]]; then
+
+		# FIXME $DATABASE from cnf
+		mysqldump --defaults-file=./conf/dev.cnf pantheon > ./tmp/$FILE
+		echo $ENVIRONMENT-$FILE
+
+	fi
+else
+	echo 'Requires $ENVIRONMENT and $FILENAME'
+fi
