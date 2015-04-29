@@ -100,6 +100,18 @@ db-push dev dev-example.com-YYYYMMDD-HHMMSS.sql
 Success/Failure
 ```
 
+### uploads-rsync
+
+**Usage**
+```
+uploads-rsync $ENVIRONMENT $DIRECTION $UUID
+uploads-rsync dev upload 00000000-0000-0000-0000-000000000000
+```
+**Returns**
+```
+Success/Failure
+```
+
 ## MAMP
 Make sure MAMP is in your $PATH - '/Applications/MAMP/bin/php/php5.6.2/bin'
 
