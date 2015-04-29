@@ -1,6 +1,8 @@
 #!/bin/bash
 # ./bin/db-dump-replace example.com dev example.com.local:8888 dev.example.com
 
+# TODO set default search in cnf
+
 if [ ! -d ./tmp ]; then
 	mkdir -v ./tmp;
 fi

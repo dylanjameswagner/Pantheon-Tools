@@ -13,16 +13,30 @@ FILE=$FILENAME-$DATETIME.sql
 
 if [[ -n $ENVIRONMENT && $FILENAME ]]; then
 
-	if [[ -n $ENVIRONMENT && $ENVIRONMENT == 'dev' ]]; then
+	if [[ -n $ENVIRONMENT && $ENVIRONMENT == 'local' ]]; then
+
+		DATABASE=$3
+
+		if [[ -n $DATABASE ]]; then
+
+			# FIXME $DATABASE from cnf
+			mysqldump --defaults-file=./conf/local.cnf $DATABASE > ./tmp/$FILE
+			echo $FILE
+
+		else
+			echo 'Requires $ENVIRONMENT, $FILE, and $DATABASE'
+		fi
+
+	elif [[ -n $ENVIRONMENT && $ENVIRONMENT == 'dev' ]]; then
 
 		# FIXME $DATABASE from cnf
-		mysqldump --defaults-file=./conf/dev.cnf pantheon > ./tmp/$FILE
+		mysqldump --defaults-file=./conf/dev.cnf pantheon > ./tmp/$ENVIRONMENT-$FILE
 		echo $ENVIRONMENT-$FILE
 
 	elif [[ -n $ENVIRONMENT && $ENVIRONMENT == 'test' ]]; then
 
 		# FIXME $DATABASE from cnf
-		mysqldump --defaults-file=./conf/dev.cnf pantheon > ./tmp/$FILE
+		mysqldump --defaults-file=./conf/test.cnf pantheon > ./tmp/$ENVIRONMENT-$FILE
 		echo $ENVIRONMENT-$FILE
 
 	fi

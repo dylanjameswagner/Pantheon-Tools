@@ -1,5 +1,5 @@
 #!/bin/bash
-# ./bin/db-pull dev example.com
+# ./bin/db-pull dev example.com dev.example.com example.com.local:8888
 
 # TODO set default search in cnf
 
@@ -17,7 +17,21 @@ FILE=$FILENAME-$DATETIME.sql
 
 if [[ -n $ENVIRONMENT && $FILENAME ]]; then
 
-	if [[ -n $ENVIRONMENT && $ENVIRONMENT == 'dev' ]]; then
+	if [[ -n $ENVIRONMENT && $ENVIRONMENT == 'local' ]]; then
+
+		DATABASE=$5
+
+		if [[ -n $DATABASE ]]; then
+
+			# FIXME $DATABASE from cnf
+			mysqldump --defaults-file=./conf/local.cnf $DATABASE > ./tmp/$FILE
+			echo $FILE
+
+		else
+			echo 'Requires $DATABASE'
+		fi
+
+	elif [[ -n $ENVIRONMENT && $ENVIRONMENT == 'dev' ]]; then
 
 		# FIXME $DATABASE from cnf
 		mysqldump --defaults-file=./conf/dev.cnf pantheon > ./tmp/$ENVIRONMENT-$FILE
@@ -25,7 +39,7 @@ if [[ -n $ENVIRONMENT && $FILENAME ]]; then
 
 	elif [[ -n $ENVIRONMENT && $ENVIRONMENT == 'test' ]]; then
 
-		# FIXME pull credentials from cnf file
+		# FIXME $DATABASE from cnf
 		mysqldump --defaults-file=./conf/test.cnf pantheon > ./tmp/$ENVIRONMENT-$FILE
 		echo $ENVIRONMENT-$FILE
 
