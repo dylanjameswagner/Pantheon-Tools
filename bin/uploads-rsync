@@ -1,5 +1,5 @@
 #!/bin/bash
-# The rsync command has been taken from [this blog post](https://pantheon.io/blog/importing-large-wordpress-sites-pantheon).
+# uploads-rsync dev upload 00000000-0000-0000-0000-000000000000
 
 # TODO
 # - create explicit download
